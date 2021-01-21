@@ -11,8 +11,6 @@ enum Сategory {
   templateUrl: './first.component.html',
   styleUrls: ['./first.component.scss']
 })
-
-
 export class FirstComponent implements OnInit {
 
   name = "Earl Grey";
