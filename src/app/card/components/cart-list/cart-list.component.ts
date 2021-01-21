@@ -21,7 +21,7 @@ export class CartListComponent implements OnInit {
     this.getBoughtProducts()
   }
 
-  trackByFn(index: number, item) {
-    return item.id;
+  trackByFn(index: number, item: ProductModel): string  {
+    return item.name; // id;  // нет такого свойства в модели: или добавить или name использовать
   }
 }
