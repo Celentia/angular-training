@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from 'src/app/products/models/product.model';
+import { CartItem } from '../../models/cart-item.model';
 import { CartProductsService } from '../../services/cart-products.service';
 
 @Component({
@@ -9,16 +10,28 @@ import { CartProductsService } from '../../services/cart-products.service';
 })
 export class CartListComponent implements OnInit {
 
-  items: ProductModel[];
+  items: CartItem[] = [];
 
   constructor(private cartProductsService: CartProductsService) { }
+
+  ngOnInit(): void {
+    this.getBoughtProducts()
+  }
 
   getBoughtProducts(): void {
     this.items = this.cartProductsService.getBoughtProducts();
   }
 
-  ngOnInit(): void {
-    this.getBoughtProducts()
+  addOneItem(id: number) {
+    this.cartProductsService.addOneItem(id);
+  }
+
+  removeOneItem(id: number) {
+    this.cartProductsService.removeOneItem(id);
+  }
+
+  deleteProductFromCart(id: number) {
+    this.cartProductsService.deleteProductFromCart(id);
   }
 
   trackByFn(index: number, item: ProductModel) {

@@ -1,1 +1,11 @@
-<button (click)="onBuy()">Buy</button>
+<div>
+  {{product.id}}
+  {{product.name}}
+  {{product.description}}
+  {{product.price}}
+  {{product.category}}
+  {{product.isAvailable}}
+</div> 
+
+<button (click)="onBuy()" [disabled]="!product.isAvailable">Add to cart</button>
+

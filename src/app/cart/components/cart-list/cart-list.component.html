@@ -1,10 +1,11 @@
+<h1>Cart items</h1>
 <div *ngIf="items.length; else emptyCart">
-  <ul *ngFor="let item of items; trackBy: trackByFn">
-    <li>{{ item.name }}</li>
-    <li>{{ item.description }}</li>
-    <li>{{ item.price }}</li>
-    <li>{{ item.category }}</li>
-    <li>{{ item.isAvailable }}</li>
-  </ul>
+  <app-cart-item
+    *ngFor="let item of items; trackBy: trackByFn"
+    [cartItem]="item"
+    (increaseCount)="addOneItem($event)"
+    (decreaseCount)="removeOneItem($event)"
+    (onChanged)="deleteProductFromCart($event)"
+  ></app-cart-item>
 </div>
 <ng-template #emptyCart>Cart list is empty</ng-template>

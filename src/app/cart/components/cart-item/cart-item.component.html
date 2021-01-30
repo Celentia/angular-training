@@ -1,0 +1,10 @@
+<ul appHighlight>
+  <li>{{ cartItem.item.name }}</li>
+  <li>{{ cartItem.item.description }}</li>
+  <li>{{ cartItem.price }}</li>
+  <li>{{ cartItem.count }}</li>
+</ul>
+
+<button (click)="onAddOneItem()">+1</button>
+<button (click)="onRemoveOneItem()">-1</button>
+<button (click)="onDeleteItem()" [ngStyle]="{ 'background-color': 'lightcoral' }">Remove {{ cartItem.item.name }}</button>

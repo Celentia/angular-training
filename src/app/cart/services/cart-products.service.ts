@@ -1,18 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Сategory } from 'src/app/products/models/category.enum';
 import { ProductModel } from 'src/app/products/models/product.model';
+import { CartItem } from '../models/cart-item.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartProductsService {
 
+  private cartList: CartItem[] = [];
+  private initialPrice: number;
+
   constructor() { }
 
-  getBoughtProducts(): ProductModel[] {
-    return [
-      { name: 'Assam Gold', description: "This is one of the finest and the most traditional variety of the leafy black tea of Assam. When brewed, the liquor is particularly light, brisk, and aromatic.", price: 59, category: Сategory.Black, isAvailable: true },
-      { name: 'Milk Oolong', description: "A high quality oolong from the Fujian province, which sends a distinctive rich waft of creaminess as you open the pack.", price: 69, category: Сategory.Oolong, isAvailable: true }
-    ];;
+  getBoughtProducts(): CartItem[] {
+    return this.cartList;
+  }
+
+  addProduct(product: ProductModel): void {
+    const cartItem = this.cartList.find(x => x.item.id === product.id);
+    this.initialPrice = product.price;
+
+    if (cartItem === undefined) {
+      this.cartList.push({
+        item: product,
+        count: 1,
+        price: this.initialPrice
+      });
+    }
+  }
+
+  addOneItem(id: number) {
+    const cartItem = this.cartList.find(x => x.item.id === id);
+    cartItem.count += 1;
+    cartItem.price = cartItem.price + this.initialPrice;
+  }
+
+  removeOneItem(id: number) {
+    const cartItem = this.cartList.find(x => x.item.id === id);
+    cartItem.count -= 1;
+    cartItem.price = cartItem.price - this.initialPrice;
+  }
+
+  deleteProductFromCart(id: number) {
+    const cartItem = this.cartList.find(x => x.item.id === id);
+    this.cartList.splice(this.cartList.indexOf(cartItem), 1);
   }
 }
