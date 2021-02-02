@@ -6,11 +6,12 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild("appTitle", {read: ElementRef}) appTitle: ElementRef;
-  
+  @ViewChild('appTitle', {read: ElementRef}) appTitle: ElementRef;
+
   title = 'shop';
 
   ngAfterViewInit(): void {
-    this.appTitle.nativeElement.textContent = "Very cool app title";
+    this.appTitle.nativeElement.textContent = 'Very cool app title';
   }
 }
+// linter

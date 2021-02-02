@@ -12,21 +12,22 @@ export class CartItemComponent {
   @Input() cartItem!: CartItem;
   @Output() increaseCount = new EventEmitter<number>();
   @Output() decreaseCount = new EventEmitter<number>();
-  @Output() onChanged = new EventEmitter<number>();
+  @Output() changed = new EventEmitter<number>();
 
   constructor() { }
 
-  onAddOneItem() {
+  onAddOneItem(): void {
     this.increaseCount.emit(this.cartItem.item.id);
   }
 
-  onRemoveOneItem() {
-    if (this.cartItem.count > 1) { 
+  onRemoveOneItem(): void {
+    if (this.cartItem.count > 1) {
       this.decreaseCount.emit(this.cartItem.item.id);
     }
   }
 
-  onDeleteItem() {
-    this.onChanged.emit(this.cartItem.item.id);
+  onDeleteItem(): void {
+    // как-то название аутпута и название метода расходятся
+    this.changed.emit(this.cartItem.item.id);
   }
 }
