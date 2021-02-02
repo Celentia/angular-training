@@ -11,11 +11,11 @@ export class ProductComponent {
 
   @Input() product!: ProductModel;
 
-  @Output() onChanged = new EventEmitter<number>();
+  @Output() changed = new EventEmitter<number>();
 
   constructor() { }
 
-  onBuy() {
-    this.onChanged.emit(this.product.id);
+  onBuy(): void {
+    this.changed.emit(this.product.id);
   }
 }

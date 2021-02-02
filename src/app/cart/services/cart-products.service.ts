@@ -29,19 +29,19 @@ export class CartProductsService {
     }
   }
 
-  addOneItem(id: number) {
+  addOneItem(id: number): void {
     const cartItem = this.cartList.find(x => x.item.id === id);
     cartItem.count += 1;
     cartItem.price = cartItem.price + this.initialPrice;
   }
 
-  removeOneItem(id: number) {
+  removeOneItem(id: number): void {
     const cartItem = this.cartList.find(x => x.item.id === id);
     cartItem.count -= 1;
     cartItem.price = cartItem.price - this.initialPrice;
   }
 
-  deleteProductFromCart(id: number) {
+  deleteProductFromCart(id: number): void {
     const cartItem = this.cartList.find(x => x.item.id === id);
     this.cartList.splice(this.cartList.indexOf(cartItem), 1);
   }

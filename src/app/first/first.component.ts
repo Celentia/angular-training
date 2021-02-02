@@ -13,8 +13,8 @@ enum Сategory {
 })
 export class FirstComponent implements OnInit {
 
-  name = "Earl Grey";
-  description = "Super cool tea";
+  name = 'Earl Grey';
+  description = 'Super cool tea';
   price = 49;
   category = Сategory[Сategory.Black];
   isAvailable = true;
@@ -25,3 +25,4 @@ export class FirstComponent implements OnInit {
   }
 
 }
+// linter
