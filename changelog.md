@@ -1,12 +1,12 @@
 ## [Task 1. Introduction]
 
-## [1.0.0] - 2021-01-19
+## 2021-01-19
 ### Added
 - A test component to learn how to display data
 - List of products
 - Cart with several goods for a purchasing imitation 
 
-## [1.1.0] - 2021-01-30
+## 2021-01-30
 ### Added
 - Ability to add, remove items from a cart and change their count
 - Сalculation of the cost of goods in the cart
@@ -15,3 +15,13 @@
 ### Changed
 - Split app into modules - card, orders, products, shared
 - Communication between product and product-list component
+
+## 2021-02-03
+### Added
+- Methods to manage data in cart service
+- ConfigOptionsService to get and set data
+- ConstantsService as object literal
+- GeneratorService that generates random sequence of data
+- LocalStorageService for working with window.localStorage
+- Methods introduction in FirstComponent
+- A directive to change font size on click via ElementRef+Renderer2
