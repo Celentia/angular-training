@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CartItem } from '../../models/cart-item.model';
+import { CartModel } from '../../models/cart-item.model';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,25 +9,24 @@ import { CartItem } from '../../models/cart-item.model';
 })
 export class CartItemComponent {
 
-  @Input() cartItem!: CartItem;
+  @Input() cartItem!: CartModel;
   @Output() increaseCount = new EventEmitter<number>();
   @Output() decreaseCount = new EventEmitter<number>();
-  @Output() changed = new EventEmitter<number>();
+  @Output() deleteItem = new EventEmitter<number>();
 
   constructor() { }
 
-  onAddOneItem(): void {
+  onincreaseQuantity(): void {
     this.increaseCount.emit(this.cartItem.item.id);
   }
 
-  onRemoveOneItem(): void {
-    if (this.cartItem.count > 1) {
+  ondecreaseQuantity(): void {
+    if (this.cartItem.count > 1) { 
       this.decreaseCount.emit(this.cartItem.item.id);
     }
   }
 
   onDeleteItem(): void {
-    // как-то название аутпута и название метода расходятся
-    this.changed.emit(this.cartItem.item.id);
+    this.deleteItem.emit(this.cartItem.item.id);
   }
 }

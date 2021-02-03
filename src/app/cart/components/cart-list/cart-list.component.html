@@ -3,9 +3,9 @@
   <app-cart-item
     *ngFor="let item of items; trackBy: trackByFn"
     [cartItem]="item"
-    (increaseCount)="onAddOneItem($event)"
-    (decreaseCount)="onRemoveOneItem($event)"
-    (changed)="onDeleteProductFromCart($event)"
+    (increaseCount)="increaseQuantity($event)"
+    (decreaseCount)="decreaseQuantity($event)"
+    (changed)="removeProduct($event)"
   ></app-cart-item>
 </div>
 <ng-template #emptyCart>Cart list is empty</ng-template>

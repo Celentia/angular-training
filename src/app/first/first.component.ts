@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { APP_CONFIG } from '../core/services/constant.service';
+import { ConfigOptionsService } from '../core/services/config-options.service';
+import { LocalStorageService } from '../core/services/local-storage.service';
+import { generatedString } from '../core/services/generator/generator.factory';
 
 enum Сategory {
   Black,
@@ -19,10 +23,15 @@ export class FirstComponent implements OnInit {
   category = Сategory[Сategory.Black];
   isAvailable = true;
 
-  constructor() { }
+  constructor(
+    @Optional() 
+    @Inject(APP_CONFIG) info: unknown,
+    @Inject(generatedString) generated: string,
+    configOptionsService: ConfigOptionsService,
+    localStorage: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
   }
 
 }
-// linter

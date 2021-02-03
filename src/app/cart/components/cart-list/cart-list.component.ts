@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from 'src/app/products/models/product.model';
-import { CartItem } from '../../models/cart-item.model';
+import { CartModel } from '../../models/cart-item.model';
 import { CartProductsService } from '../../services/cart-products.service';
 
 @Component({
@@ -10,28 +10,28 @@ import { CartProductsService } from '../../services/cart-products.service';
 })
 export class CartListComponent implements OnInit {
 
-  items: CartItem[] = [];
+  items: CartModel[] = [];
 
   constructor(private cartProductsService: CartProductsService) { }
 
   ngOnInit(): void {
-    this.getBoughtProducts();
+    this.getProducts()
   }
 
-  getBoughtProducts(): void {
-    this.items = this.cartProductsService.getBoughtProducts();
+  getProducts(): void {
+    this.items = this.cartProductsService.getProducts();
   }
 
-  onAddOneItem(id: number): void {
-    this.cartProductsService.addOneItem(id);
+  increaseQuantity(id: number): void {
+    this.cartProductsService.increaseQuantity(id);
   }
 
-  onRemoveOneItem(id: number): void {
-    this.cartProductsService.removeOneItem(id);
+  decreaseQuantity(id: number): void {
+    this.cartProductsService.decreaseQuantity(id);
   }
 
-  onDeleteProductFromCart(id: number): void {
-    this.cartProductsService.deleteProductFromCart(id);
+  removeProduct(id: number): void {
+    this.cartProductsService.removeProduct(id);
   }
 
   trackByFn(index: number, item: ProductModel): string {
