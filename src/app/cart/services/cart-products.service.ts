@@ -23,6 +23,7 @@ export class CartProductsService {
     if (CartModel === undefined) {
       this.cartList.push({
         item: product,
+        name: product.name,
         count: 1,
         price: this.initialPrice
       });

@@ -1,10 +1,10 @@
 <ul appHighlight [appFontSize]="'20px'" >
-  <li>{{ cartItem.item.name }}</li>
+  <li>{{ cartItem.name }}</li>
   <li>{{ cartItem.item.description }}</li>
-  <li>{{ cartItem.price }}</li>
+  <li>{{ cartItem.price | currency: 'EUR' }}</li>
   <li>{{ cartItem.count }}</li>
 </ul>
 
 <button (click)="onincreaseQuantity()">+1</button>
 <button (click)="ondecreaseQuantity()">-1</button>
-<button (click)="onDeleteItem()" [ngStyle]="{ 'background-color': 'lightcoral' }">Remove {{ cartItem.item.name }}</button>
+<button (click)="onRemoveProduct()" [ngStyle]="{ 'background-color': 'lightcoral' }">Remove {{ cartItem.item.name }}</button>

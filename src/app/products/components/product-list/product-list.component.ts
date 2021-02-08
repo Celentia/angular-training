@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CartProductsService } from 'src/app/cart/services/cart-products.service';
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
@@ -10,7 +11,7 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: ProductModel[];
+  products$: Observable<ProductModel[]>;
 
   constructor(private productsService: ProductsService, private cartProductsService: CartProductsService) { }
 
@@ -19,11 +20,13 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.products = this.productsService.getProducts();
+    this.products$ = this.productsService.getProducts();
   }
 
   addProductToCart(id: number): void {
-    const product = this.products.find(x => x.id === id);
-    this.cartProductsService.addProduct(product);
+    this.products$.subscribe(val => {
+      const product = val.find(x => x.id === id);
+      this.cartProductsService.addProduct(product);
+    })
   }
 }

@@ -1,11 +1,25 @@
 <h1>Cart items</h1>
 <div *ngIf="items.length; else emptyCart">
   <app-cart-item
-    *ngFor="let item of items; trackBy: trackByFn"
+    *ngFor="let item of items | orderBy:orderByValue:isAsc"
     [cartItem]="item"
     (increaseCount)="increaseQuantity($event)"
     (decreaseCount)="decreaseQuantity($event)"
-    (changed)="removeProduct($event)"
+    (removeProduct)="removeProduct($event)"
   ></app-cart-item>
+
+  <br>
+
+  <span>Select a sort criterion: </span>
+  <select [(ngModel)]="orderByValue">
+    <option *ngFor="let orderOption of orderArray" [value]="orderOption">{{ orderOption }}</option>
+  </select>
+  <div>
+    <label>
+      Change sort order:
+      <input type="checkbox" [(ngModel)]="isAsc">
+    </label>
+  </div> 
 </div>
+
 <ng-template #emptyCart>Cart list is empty</ng-template>

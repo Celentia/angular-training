@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from 'src/app/products/models/product.model';
 import { CartModel } from '../../models/cart-item.model';
 import { CartProductsService } from '../../services/cart-products.service';
 
@@ -11,6 +10,10 @@ import { CartProductsService } from '../../services/cart-products.service';
 export class CartListComponent implements OnInit {
 
   items: CartModel[] = [];
+
+  orderArray = ['price', 'count', 'name'];
+  orderByValue: 'price';
+  isAsc = false;
 
   constructor(private cartProductsService: CartProductsService) { }
 
@@ -32,9 +35,5 @@ export class CartListComponent implements OnInit {
 
   removeProduct(id: number): void {
     this.cartProductsService.removeProduct(id);
-  }
-
-  trackByFn(index: number, item: ProductModel): string {
-    return item.name;
   }
 }

@@ -25,3 +25,10 @@
 - LocalStorageService for working with window.localStorage
 - Methods introduction in FirstComponent
 - A directive to change font size on click via ElementRef+Renderer2
+
+## 2021-02-08
+### Added
+- Currency pipe to price value in cart items
+- Uppercade pipe to the name of product
+- Async pipe to display list of products asyncronously via observable
+- Custom OrderBy pipe to sort items in cart by price, count and name

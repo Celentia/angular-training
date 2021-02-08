@@ -12,7 +12,7 @@ export class CartItemComponent {
   @Input() cartItem!: CartModel;
   @Output() increaseCount = new EventEmitter<number>();
   @Output() decreaseCount = new EventEmitter<number>();
-  @Output() deleteItem = new EventEmitter<number>();
+  @Output() removeProduct = new EventEmitter<number>();
 
   constructor() { }
 
@@ -26,7 +26,7 @@ export class CartItemComponent {
     }
   }
 
-  onDeleteItem(): void {
-    this.deleteItem.emit(this.cartItem.item.id);
+  onRemoveProduct(): void {
+    this.removeProduct.emit(this.cartItem.item.id);
   }
 }
