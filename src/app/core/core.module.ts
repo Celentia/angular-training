@@ -16,7 +16,7 @@ import { LocalStorageService } from './services/local-storage.service';
     },
     {
       provide: LocalStorageService,
-      useValue: LocalStorageService
+      useValue: LocalStorageService // почему useValue? Ведь у вас нет экземпляра, надо взять класс и создать экземпляр - useClass
     }
   ]
 })

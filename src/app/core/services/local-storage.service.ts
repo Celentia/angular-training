@@ -7,6 +7,7 @@ export class LocalStorageService {
 
   constructor() { }
 
+  // а если тип будет string | object?
   setItem(key: string, value: string): void {
     localStorage.setItem(key, value);
   }

@@ -17,10 +17,10 @@ export class CartProductsService {
   }
 
   addProduct(product: ProductModel): void {
-    const CartModel = this.cartList.find(x => x.item.id === product.id);
+    const cartModel = this.cartList.find(x => x.item.id === product.id);
     this.initialPrice = product.price;
 
-    if (CartModel === undefined) {
+    if (cartModel === undefined) {
       this.cartList.push({
         item: product,
         name: product.name,
