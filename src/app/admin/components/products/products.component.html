@@ -1,0 +1,5 @@
+<app-product-item
+  *ngFor="let product of products$ | async" 
+  [product]="product" 
+  (showProduct)="onShowProduct($event)">
+</app-product-item>

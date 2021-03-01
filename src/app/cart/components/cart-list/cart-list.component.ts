@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartModel } from '../../models/cart-item.model';
 import { CartProductsService } from '../../services/cart-products.service';
 
@@ -15,7 +16,7 @@ export class CartListComponent implements OnInit {
   orderByValue: 'price';
   isAsc = false;
 
-  constructor(private cartProductsService: CartProductsService) { }
+  constructor(private cartProductsService: CartProductsService, private router: Router) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -35,5 +36,10 @@ export class CartListComponent implements OnInit {
 
   removeProduct(id: number): void {
     this.cartProductsService.removeProduct(id);
+  }
+
+  onShowOrders(): void {
+    const link = ['/cart/order'];
+    this.router.navigate(link);
   }
 }

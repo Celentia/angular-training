@@ -14,4 +14,3 @@ export class AppComponent implements AfterViewInit {
     this.appTitle.nativeElement.textContent = 'Very cool app title';
   }
 }
-// linter

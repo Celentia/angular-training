@@ -32,3 +32,11 @@
 - Uppercade pipe to the name of product
 - Async pipe to display list of products asyncronously via observable
 - Custom OrderBy pipe to sort items in cart by price, count and name
+
+## 2021-03-01
+### Added
+- Routes to /products-list, /product/:productID, /cart
+- Route to ProcessOrderComponent with CanLoad guard that allows to display the component unless the cart isn't empty
+- Admin page with routes to the list of products, product item with resolve and CanDeactivate guard, and orders
+- Routing modules for products, cart, admin features
+- LocalStorage for keeping data with cart items

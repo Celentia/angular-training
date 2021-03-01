@@ -1,5 +1,4 @@
-<h1>Cart items</h1>
-<div *ngIf="items.length; else emptyCart">
+<div *ngIf="items; else emptyCart">
   <app-cart-item
     *ngFor="let item of items | orderBy:orderByValue:isAsc"
     [cartItem]="item"
@@ -21,5 +20,7 @@
     </label>
   </div> 
 </div>
+
+<button (click)="onShowOrders()">Show orders</button>
 
 <ng-template #emptyCart>Cart list is empty</ng-template>

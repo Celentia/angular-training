@@ -13,7 +13,8 @@ export class CartProductsService {
   constructor() { }
 
   getProducts(): CartModel[] {
-    return this.cartList;
+    let cartData = JSON.parse(localStorage.getItem('cartItems'));
+    return cartData;
   }
 
   addProduct(product: ProductModel): void {
@@ -27,6 +28,8 @@ export class CartProductsService {
         count: 1,
         price: this.initialPrice
       });
+
+      localStorage.setItem('cartItems', JSON.stringify(this.cartList));
     }
   }
 
