@@ -1,0 +1,49 @@
+<h1>Product Form</h1>
+<form (ngSubmit)="onSaveProduct()" id="product-form" #form="ngForm" autocomplete="off">
+  <div>
+    <label for="name">Name</label>
+    <input type="text"
+        id="name" name="name"
+        placeholder="Name"
+        required
+        [(ngModel)]="product.name">
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <textarea type="text"
+        id="description" name="description"
+        placeholder="Description"
+        required
+        cols="100"
+        [(ngModel)]="product.description">
+      </textarea>
+  </div>
+  <div>
+    <label for="price">Price</label>
+    <input type="number"
+        id="price" name="price"
+        placeholder="Price"
+        [(ngModel)]="product.price">
+  </div>
+  <div>
+    <label for="category">Category</label>
+    <input type="text"
+        id="category" name="category"
+        placeholder="Category"
+        [(ngModel)]="product.category">
+  </div>
+  <div>
+    <label for="availability">Availability</label>
+    <input type="availability"
+        id="availability" name="availability"
+        placeholder="Availability"
+        [(ngModel)]="product.isAvailable">
+  </div>
+  <button
+      type="submit"
+      form="product-form"
+      [disabled]="form.invalid">
+        Save
+  </button>
+  <button (click)="onGoBack()">Back</button>
+</form>

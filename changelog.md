@@ -40,3 +40,12 @@
 - Admin page with routes to the list of products, product item with resolve and CanDeactivate guard, and orders
 - Routing modules for products, cart, admin features
 - LocalStorage for keeping data with cart items
+
+## 2021-03-10
+### Added
+- JSON server with `products` and `orders` data arrays
+- Service with HttpClient
+- TimingInterceptor for displaying products requests duration 
+- Methods for creating, editing, getting and deleting products via Promise Service and the same methods for orders via Observable Service
+### Changed
+- Tsconfig

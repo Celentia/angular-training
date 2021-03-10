@@ -1,0 +1,9 @@
+<button (click)="onCreateOrder()">New Order</button>
+<br>
+
+<app-order 
+  *ngFor="let order of orders$ | async" 
+  [order]="order"
+  (editOrder)="onEditOrder($event)"
+  (deleteOrder)="onDeleteOrder($event)">
+</app-order>

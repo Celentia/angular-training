@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +13,7 @@ import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './login/login.component';
-
+import { httpInterceptorProviders } from './core/interceptors';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +25,16 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     CartModule,
     CoreModule,
+    CommonModule,
     OrdersModule,
     ProductsModule,
     SharedModule,
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

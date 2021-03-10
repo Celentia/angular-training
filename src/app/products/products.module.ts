@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ProductComponent } from './components';
 import { ProductsRoutingModule } from './products-routing.module';
@@ -8,6 +9,7 @@ import { ProductsRoutingModule } from './products-routing.module';
   declarations: [ProductComponent, ProductsRoutingModule.components],
   imports: [
     CommonModule,
+    FormsModule,
     ProductsRoutingModule
   ]
 })

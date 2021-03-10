@@ -1,5 +1,4 @@
 <div>
-  {{product.id}}
   {{product.name | uppercase }}
   {{product.description}}
   {{product.price}}
@@ -9,3 +8,5 @@
 
 <button (click)="onBuyProduct()" [disabled]="!product.isAvailable">Add to cart</button>
 <button (click)="onShowProduct()">Show product</button>
+<button (click)="onEditProduct()">Edit</button>
+<button (click)="onDeleteProduct()">Delete</button>

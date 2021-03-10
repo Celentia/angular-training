@@ -13,6 +13,8 @@ export class ProductComponent {
 
   @Output() buyProduct = new EventEmitter<number>();
   @Output() showProduct = new EventEmitter<ProductModel>();
+  @Output() editProduct = new EventEmitter<ProductModel>();
+  @Output() deleteProduct = new EventEmitter<ProductModel>();
 
   constructor() { }
 
@@ -22,5 +24,13 @@ export class ProductComponent {
   
   onShowProduct() {
     this.showProduct.emit(this.product);
+  }  
+
+  onEditProduct() {
+    this.editProduct.emit(this.product);
+  }
+
+  onDeleteProduct() {
+    this.deleteProduct.emit(this.product);
   }
 }
