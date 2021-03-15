@@ -12,7 +12,7 @@ import { ProductsPromiseService } from '../../services';
 })
 export class ProductViewComponent implements OnInit {
 
-  products: Promise<Array<ProductModel>>;
+  products: Promise<Array<ProductModel>>; // ?
   product: ProductModel;
 
   constructor(
@@ -32,10 +32,10 @@ export class ProductViewComponent implements OnInit {
           return params.get('productID')
             ? this.productsPromiseService.getProduct(+params.get('productID'))
             : Promise.resolve(null);
-        }))  
+        }))
       .subscribe(observer);
   }
-  
+
   onGoBack(): void {
     this.router.navigate(['./../../'], { relativeTo: this.route});
   }
