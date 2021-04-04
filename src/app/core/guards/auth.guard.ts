@@ -8,8 +8,6 @@ import { UserRoleService } from '../services/user-role.service';
 })
 export class AuthGuard implements CanActivate {
 
-  isAdminRights: boolean;
-
   constructor(private userRoleService: UserRoleService, private router: Router) { }
 
   canActivate(
