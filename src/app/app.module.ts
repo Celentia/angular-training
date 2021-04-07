@@ -14,6 +14,7 @@ import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { httpInterceptorProviders } from './core/interceptors';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { httpInterceptorProviders } from './core/interceptors';
     ProductsModule,
     SharedModule,
     HttpClientModule,
+    RootStoreModule,
     AppRoutingModule
   ],
   providers: [

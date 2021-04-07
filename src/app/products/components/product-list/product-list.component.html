@@ -4,13 +4,15 @@
 <br>
 
 <app-product 
-  *ngFor="let product of products | async" 
+  *ngFor="let product of (products$ | async)"
   [product]="product" 
   (buyProduct)="addProductToCart($event)" 
   (showProduct)="onShowProduct($event)"
   (editProduct)="onEditProduct($event)"
   (deleteProduct)="onDeleteProduct($event)">
 </app-product>
+
+<p *ngIf="(productsError$ | async) as value">{{value}}</p>
 
 <div>
   <a routerLink="/cart">Go to cart</a>

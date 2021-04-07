@@ -1,5 +1,5 @@
 import { Сategory } from './category.enum';
-export class ProductModel {
+export class ProductModel implements Product {
   constructor(
     public id: number = null,
     public name: string = '',
@@ -8,4 +8,13 @@ export class ProductModel {
     public category?: Сategory,
     public isAvailable?: boolean
   ) {}
+}
+
+export interface Product {
+  id?: number;
+  name?: string;
+  description?: string;
+  price?: number;
+  category?: Сategory;
+  isAvailable?: boolean;
 }

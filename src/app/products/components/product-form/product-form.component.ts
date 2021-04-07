@@ -1,50 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-
-import { ProductModel } from './../../models/product.model';
-import { ProductsPromiseService } from '../../services';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { selectSelectedProductByUrl } from './../../../core/@ngrx';
+import * as ProductsActions from './../../../core/@ngrx/products/products.actions';
+import * as RouterActions from './../../../core/@ngrx/router/router.actions';
+import { ProductModel, Product } from './../../models/product.model';
 
 @Component({
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy  {
   product: ProductModel;
+  private componentDestroyed$: Subject<void> = new Subject<void>();
 
   constructor(
-    private productsPromiseService: ProductsPromiseService,
-    private router: Router,
-    private route: ActivatedRoute
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.product = new ProductModel();
 
-    const observer = {
-      next: (product: ProductModel) => (this.product = { ...product }),
-      error: (err: any) => console.log(err)
+    const observer: any = {
+      next: (product: ProductModel) => {
+        this.product = {...product}; 
+      },
+      error(err) {
+        console.log(err);
+      },
+      complete() {
+        console.log('Stream is completed');
+      }
     };
-    this.route.paramMap
+
+    this.store.select(selectSelectedProductByUrl)
       .pipe(
-        switchMap((params: ParamMap) => {
-          return params.get('productID')
-            ? this.productsPromiseService.getProduct(+params.get('productID'))
-            : Promise.resolve(null);
-        }))  
+        takeUntil(this.componentDestroyed$)
+      )
       .subscribe(observer);
   }
 
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
+  }
+
   onSaveProduct() {
-    const product = { ...this.product } as ProductModel;
-    const method = product.id ? 'updateProduct' : 'createProduct';
-    console.log(product);
-    this.productsPromiseService[method](product)
-      .then(() => this.onGoBack())
-      .catch(err => console.log(err));
+    const product = { ...this.product } as Product;
+    if (product.id) {
+      this.store.dispatch(ProductsActions.updateProduct({ product }));
+    } else {
+      this.store.dispatch(ProductsActions.createProduct({ product }));
+    }
   }
 
   onGoBack(): void {
-    this.router.navigate(['./../../'], { relativeTo: this.route});
+    this.store.dispatch(RouterActions.go({
+      path: ['/products-list']
+    }));
   }
 }

@@ -49,3 +49,11 @@
 - Methods for creating, editing, getting and deleting products via Promise Service and the same methods for orders via Observable Service
 ### Changed
 - Tsconfig
+
+## 2021-04-07
+### Added
+- NgRx store, actions, effects, selectors, reducers for products
+- Feature and State selectors
+- Routing via @ngrx/router-store for products
+- Navigation via action 'FORWARD', 'GO', 'BACK'
+- Combined selector for getting data from getProductByUrl

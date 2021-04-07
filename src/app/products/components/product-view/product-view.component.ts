@@ -22,7 +22,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit(): void {
     this.product = new ProductModel();
     const observer = {
-      next: (task: ProductModel) => (this.product = { ...task }),
+      next: (product: ProductModel) => (this.product = { ...product }),
       error: (err: any) => console.log(err)
     };
     this.route.paramMap

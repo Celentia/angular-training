@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectProductsData, selectProductsError } from './../../../core/@ngrx';
+import { Observable } from 'rxjs';
+import * as RouterActions from './../../../core/@ngrx/router/router.actions';
+import * as ProductsActions from './../../../core/@ngrx/products/products.actions';
 
 import { CartProductsService } from 'src/app/cart/services/cart-products.service';
 import { UserRoleService } from 'src/app/core/services/user-role.service';
-import { ProductModel } from '../../models/product.model';
-import { ProductsPromiseService } from './../../services';
-
+import { ProductModel, Product } from '../../models/product.model';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -14,20 +16,19 @@ import { ProductsPromiseService } from './../../services';
 export class ProductListComponent implements OnInit {
 
   products: Promise<Array<ProductModel>>;
+  products$: Observable<ReadonlyArray<Product>>;
+  productsError$: Observable<Error | string>;
 
   constructor(
     public userRoleService: UserRoleService,
-    private router: Router, 
     private cartProductsService: CartProductsService,
-    private productsPromiseService: ProductsPromiseService
+    private store: Store
   ) { }
 
   ngOnInit(): void {
-    this.getProducts();
-  }
-
-  getProducts(): void {
-    this.products = this.productsPromiseService.getProducts();
+    this.products$ = this.store.select(selectProductsData);
+    this.productsError$ = this.store.select(selectProductsError);
+    this.store.dispatch(ProductsActions.getProducts());
   }
 
   async addProductToCart(id: number): Promise<void> {
@@ -37,23 +38,26 @@ export class ProductListComponent implements OnInit {
 
   onShowProduct(product: ProductModel): void {
     const link = ['/product', product.id];
-    this.router.navigate(link);
+    this.store.dispatch(RouterActions.go({
+      path: link
+    }));
   }
 
   onCreateProduct() {
-    const link = ['/product/add'];
-    this.router.navigate(link);
+    this.store.dispatch(RouterActions.go({
+      path: ['/product/add']
+    }));
   }
 
   onEditProduct(product: ProductModel) {
     const link = ['/edit', product.id];
-    this.router.navigate(link);
+    this.store.dispatch(RouterActions.go({
+      path: link
+    }));
   }
 
   onDeleteProduct(product: ProductModel): void {
-    this.productsPromiseService
-      .deleteProduct(product)
-      .then(() => (this.products = this.productsPromiseService.getProducts()))
-      .catch(err => console.log(err));
+    const productToDelete: Product = { ...product };
+    this.store.dispatch(ProductsActions.deleteProduct({ product: productToDelete }));
   }
 }
