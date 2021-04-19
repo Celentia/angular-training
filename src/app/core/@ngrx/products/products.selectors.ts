@@ -25,6 +25,9 @@ export const selectSelectedProductByUrl = createSelector(
   selectProductsData,
   selectRouterState,
   (products, router): ProductModel => {
+    // Чтобы параметр находился по такому пути, необходимо использовать сериалайзер
+    // Если его не использовать, то параметр будет находиться по такому пути
+    // const productID = router.state.root.firstChild.params.productID;
     const productID = router.state.params.productID;
     if (productID && Array.isArray(products)) {
         return products.find(product => product.id === +productID);
